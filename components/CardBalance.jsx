@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Dimensions } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, Dimensions} from 'react-native'
+import React, { useState } from 'react'
 import { COLORS } from '../constant/color'
 import { useFonts } from 'expo-font';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
@@ -8,6 +8,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 const width = Dimensions.get("screen").width - 40;
 
 const CardBalance = () => {
+  const [hideBalance, setHideBalance] = useState(false)
   let [fontsLoaded] = useFonts({
     InterRegular: require("../assets/Fonts/Inter-Regular.ttf"),
     InterMedium: require("../assets/Fonts/Inter-Medium.ttf"),
@@ -17,9 +18,9 @@ const CardBalance = () => {
     <View style={styles.container}>
       <View style={styles.cardHeader}>
         <Text style={fontsLoaded && styles.cardHeaderText}>Total Balance</Text>
-        <MaterialCommunityIcons name="dots-horizontal" size={28} color={COLORS.white} />
+        <MaterialCommunityIcons name="dots-horizontal" size={28} color={COLORS.white} onPress={() => setHideBalance(prev => !prev)} />
       </View>
-      <Text style={styles.cardBalance}>$2,548.00</Text>
+      <Text style={styles.cardBalance}>{hideBalance ? "*****" : "$2,548.00"}</Text>
       <View style={styles.cardTransContainer}>
         <View style={styles.cardTransWrapper}>
           <Text style={styles.cardTransText}>Income</Text>

@@ -1,14 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from 'react-native'
 import React, { useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useFonts } from 'expo-font'
 import { COLORS } from '../constant/color'
 import { StatusBar } from 'expo-status-bar'
 import CardBalance from '../components/CardBalance'
 import TransHistory from '../components/TransHistory'
 import Ionicons from "react-native-vector-icons/Ionicons"
+import { transImage } from '../Data/transactions'
 
+const TransImage = ({ image }) => {
+  return (
+    <View>
+      <Image source={image.img}
+        resizeMode="contain"
+        style={styles.profileImage}
+      />
+    </View>
+  )
+}
 
 const Home = () => {
   let [fontsLoaded] = useFonts({
@@ -28,15 +38,38 @@ const Home = () => {
             }
           </View>
           <TouchableOpacity>
-            <Ionicons name="ios-notifications-outline" size={28} color={COLORS.white}/>
+            <Ionicons name="ios-notifications-outline" size={28} color={COLORS.white} />
           </TouchableOpacity>
         </View>
       </View>
       <CardBalance />
       <View style={styles.contentContainer}>
         <TransHistory />
+        <View style={styles.transList}>
+          <View style={styles.transHeader}>
+            <Text style={fontsLoaded && styles.transHeaderText}>Send Again</Text>
+            <TouchableOpacity>
+              <Text style={fontsLoaded && styles.transHeaderTextBtn}>See all</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{
+            display: "flex", justifyContent: "space-between",
+          }}>
+            <FlatList
+              data={transImage}
+              renderItem={({ item }) => <TransImage image={item} />}
+              keyExtractor={(_, i) => i}
+              showsVerticalScrollIndicator={false}
+              horizontal={true}
+              contentContainerStyle={{
+                flex: 1,
+                justifyContent: "space-between",
+                marginVertical: 10,
+              }}
+            />
+          </View>
+        </View>
       </View>
-
     </SafeAreaView>
   )
 }
@@ -70,5 +103,29 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-  }
+  },
+  transHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 5,
+  },
+  transHeaderText: {
+    color: COLORS.dark,
+    fontSize: 17,
+    fontFamily: "InterRegular",
+    fontWeight: "700",
+  },
+  transHeaderTextBtn: {
+    color: COLORS.secDark,
+    fontFamily: "InterRegular",
+  },
+  transList: {
+    padding: 20,
+    paddingVertical: 40,
+  },
+  profileImage: {
+    borderRadius: 50,
+    width: 50,
+    height: 50,
+  },
 });

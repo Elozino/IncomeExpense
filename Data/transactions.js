@@ -28,3 +28,21 @@ export const transaction = [
     type: "expense",
   },
 ];
+
+export const transImage = [
+  {
+    img: require("../assets/image/image7.png")
+  },
+  {
+    img: require("../assets/image/image8.png")
+  },
+  {
+    img: require("../assets/image/image9.png")
+  },
+  {
+    img: require("../assets/image/image10.png")
+  },
+  {
+    img: require("../assets/image/image11.png")
+  },
+]
