@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList } from 'react-native'
 import React from 'react'
-import { SafeAreaView,  } from 'react-native-safe-area-context'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
 import Ionicons from "react-native-vector-icons/Ionicons"
@@ -14,10 +14,10 @@ const ProfileBtn = ({ keyName }) => {
   return (
     <TouchableOpacity style={styles.profileBtn}>
       <View>
-        <Text>Icon</Text>
+        <Text>{keyName.icon ?? "icon"}</Text>
       </View>
       <View style={{ marginLeft: 20 }}>
-        <Text style={{ fontWeight: "700", fontSize: 20, fontFamily: "InterLight", }}>{keyName.name}</Text>
+        <Text style={{ fontWeight: "700", fontSize: 20, fontFamily: "InterLight", color: COLORS.dark, opacity: 0.9 }}>{keyName.name}</Text>
       </View>
     </TouchableOpacity>
   )
@@ -65,24 +65,27 @@ const Profile = () => {
           }
         </View>
         <View style={styles.profileNavContainer}>
-          <TouchableOpacity style={styles.profileBtnInvite}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={styles.profileBtnInvite}>
             <View>
-              <Text>Icon</Text>
+              {/* <MaterialIcons name="wallet-giftcard" size={28} /> */}
+              <Ionicons name="gift" size={30} color={COLORS.primary} />
             </View>
             <View style={{ marginLeft: 20 }}>
-              <Text style={{ fontWeight: "700", fontSize: 20, fontFamily: "InterLight", }}>Invite Friends</Text>
+              <Text style={{ color: COLORS.dark, opacity: 0.85, fontWeight: "700", fontSize: 20, fontFamily: "InterLight", }}>Invite Friends</Text>
             </View>
           </TouchableOpacity>
           <FlatList
             data={profile}
             renderItem={({ item }) => <ProfileBtn keyName={item} />}
             keyExtractor={(_, i) => i}
-            numColumns={1}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{
               // flex: 1,
               // backgroundColor: "red",
-              marginVertical: 10,
+              // paddingVertical: 5,
+              paddingBottom: 50
             }}
           />
         </View>
@@ -117,6 +120,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 20,
+    paddingHorizontal: 10,
     position: "relative",
   },
   profileCard: {
@@ -146,7 +150,7 @@ const styles = StyleSheet.create({
   profileBtn: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 20,
+    paddingVertical: 12,
 
   }
 })

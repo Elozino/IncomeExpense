@@ -1,26 +1,30 @@
+import Ionicons from "react-native-vector-icons/Ionicons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { COLORS } from "../constant/color";
+
 export const profile = [
   {
-    icon: "",
-    name: "Account info",
+    icon: <Ionicons name="person" size={28} color={COLORS.secDark}/>,
+    name: "Account Info",
     navigateTo: "",
   },
   {
-    icon: "",
-    name: "Personal profile",
+    icon: <MaterialIcons name="people" size={30} color={COLORS.secDark}/>,
+    name: "Personal Profile",
     navigateTo: "",
   },
   {
-    icon: "",
+    icon: <MaterialIcons name="message" size={28} color={COLORS.secDark}/>,
     name: "Message center",
     navigateTo: "",
   },
   {
-    icon: "",
+    icon: <MaterialIcons name="security" size={28} color={COLORS.secDark}/>,
     name: "Login and security",
     navigateTo: "",
   },
   {
-    icon: "",
+    icon: <MaterialIcons name="info" size={28} color={COLORS.secDark}/>,
     name: "Data and privacy",
     navigateTo: "",
   },

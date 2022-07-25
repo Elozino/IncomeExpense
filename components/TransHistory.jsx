@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { COLORS } from '../constant/color'
 import { useFonts } from 'expo-font'
-import { transaction } from '../Data/transactions'
+import TransactionStats from './TransactionStats'
 
 const TransHistory = () => {
   let [fontsLoaded] = useFonts({
@@ -17,24 +17,7 @@ const TransHistory = () => {
           <Text style={fontsLoaded && styles.transHeaderTextBtn}>See all</Text>
         </TouchableOpacity>
       </View>
-      {transaction.map((item, i) => (
-        <View style={styles.transHistoryWrapper} key={i}>
-          <View style={styles.transHistory}>
-            <View style={styles.transHistoryLeft}>
-              <View style={styles.transHistoryLogo}>
-                <Text style={{ fontSize: 20 }}>UP</Text>
-              </View>
-              <View>
-                <Text style={styles.transHistoryName}>{item.name}</Text>
-                <Text style={styles.transHistoryTime}>{item.time}</Text>
-              </View>
-            </View>
-            <View>
-              <Text style={[styles.transHistoryAmount, { color: item.type === "income" ? COLORS.income : COLORS.expense }]}>{item.amount}</Text>
-            </View>
-          </View>
-        </View>
-      ))}
+      <TransactionStats />
     </View>
   )
 }
@@ -57,7 +40,7 @@ const styles = StyleSheet.create({
   },
   transHeaderText: {
     color: COLORS.dark,
-    fontSize: 17,
+    fontSize: 20,
     fontFamily: "InterRegular",
     fontWeight: "700",
   },
