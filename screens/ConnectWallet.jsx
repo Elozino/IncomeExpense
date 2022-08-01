@@ -16,6 +16,7 @@ const Analytics = () => {
   const [account, setAccount] = useState(false)
   const [debit, setDebit] = useState(false)
   const [paypal, setPaypal] = useState(false)
+  const [deposit, setDeposit] = useState(false)
 
   let [fontsLoaded] = useFonts({
     InterBlack: require("../assets/Fonts/Inter-Black.ttf"),
@@ -100,7 +101,11 @@ const Analytics = () => {
             <View style={styles.iconWrapper}>
               <FontAwesome name="bank" size={24} color={COLORS.btnPrimary} />
             </View>
-            <Text style={styles.text}>Bank</Text>
+            <View>
+              <Text style={styles.text}>Bank Link</Text>
+              <Text>Connect your bank account</Text>
+              <Text>to deposit & fund</Text>
+            </View>
           </View>
           <CheckBox
             disabled={false}
@@ -108,6 +113,35 @@ const Analytics = () => {
             onValueChange={(newValue) => {
               setDebit(newValue)
               setPaypal(false)
+              setDeposit(false)
+            }}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            ...styles.flex,
+            padding: 10,
+            backgroundColor: deposit ? "rgba(66, 150, 144, .3)" : "white",
+            borderRadius: 10,
+            marginTop: 15
+          }}
+        >
+          <View style={styles.paymentMethod}>
+            <View style={styles.iconWrapper}>
+              <FontAwesome name="dollar" size={24} color={COLORS.btnPrimary} />
+            </View>
+            <View>
+              <Text style={styles.text}>Microdeposits</Text>
+              <Text>Connect bank in 5 - 7 days</Text>
+            </View>
+          </View>
+          <CheckBox
+            disabled={false}
+            value={deposit}
+            onValueChange={(newValue) => {
+              setDeposit(newValue)
+              setPaypal(false)
+              setDebit(false)
             }}
           />
         </TouchableOpacity>
@@ -122,15 +156,19 @@ const Analytics = () => {
         >
           <View style={styles.paymentMethod}>
             <View style={styles.iconWrapper}>
-              <FontAwesome name="dollar" size={24} color={COLORS.btnPrimary} />
+              <FontAwesome5 name="paypal" size={24} color={COLORS.btnPrimary} />
             </View>
-            <Text style={styles.text}>dollar</Text>
+            <View>
+              <Text style={styles.text}>Paypal</Text>
+              <Text>Connect your paypal account</Text>
+            </View>
           </View>
           <CheckBox
             disabled={false}
             value={paypal}
             onValueChange={(newValue) => {
               setPaypal(newValue)
+              setDeposit(false)
               setDebit(false)
             }}
           />

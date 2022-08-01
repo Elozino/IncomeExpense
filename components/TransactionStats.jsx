@@ -12,7 +12,7 @@ const TransactionStats = ({ navigation }) => {
     <View>
       {transaction.map((item, i) => (
         <TouchableOpacity activeOpacity={0.5} style={styles.transHistoryWrapper} key={i}
-          onPress={() => navigation.navigate("TransactionDetails", item)}
+          // onPress={() => navigation.navigate("TransactionDetails", item)}
         >
           <View style={styles.transHistory}>
             <View style={styles.transHistoryLeft}>
