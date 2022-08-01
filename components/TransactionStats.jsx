@@ -12,7 +12,7 @@ const TransactionStats = ({ navigation }) => {
     <View>
       {transaction.map((item, i) => (
         <TouchableOpacity activeOpacity={0.5} style={styles.transHistoryWrapper} key={i}
-          onPress={() => navigation.navigate("TransactionDetails")}
+          onPress={() => navigation.navigate("TransactionDetails", item)}
         >
           <View style={styles.transHistory}>
             <View style={styles.transHistoryLeft}>
@@ -25,7 +25,7 @@ const TransactionStats = ({ navigation }) => {
               </View>
             </View>
             <View>
-              <Text style={[styles.transHistoryAmount, { color: item.type === "income" ? COLORS.income : COLORS.expense }]}>{item.amount}</Text>
+              <Text style={[styles.transHistoryAmount, { color: item.type === "income" ? COLORS.income : COLORS.expense }]}>{item.type == "income" ? " + " : " - "}{item.amount}</Text>
             </View>
           </View>
         </TouchableOpacity>

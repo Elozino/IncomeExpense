@@ -63,7 +63,7 @@ const BottomTabScreen = () => {
         }}
       />
       <BottomTab.Screen
-        name="WalletStack"
+        name="Wallet"
         component={WalletStack}
         options={{
           tabBarIcon: ({ focused, color }) => (

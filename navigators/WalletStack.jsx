@@ -10,7 +10,7 @@ const WalletStack = () => {
     <>
       <StatusBar style="auto" />
       <Stack.Navigator screenOptions={{ header: () => null }}>
-        <Stack.Screen name="Wallet" component={Wallet} />
+        <Stack.Screen name="Wallet1" component={Wallet} />
         <Stack.Screen name="TransactionDetails" component={TransactionDetails} />
         <Stack.Screen name="BillDetails" component={BillDetails} />
         <Stack.Screen name="BillPayment" component={BillPayment} />

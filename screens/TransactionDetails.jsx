@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useFonts } from 'expo-font';
@@ -7,7 +7,9 @@ import { StatusBar } from 'expo-status-bar';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 
-const TransactionDetails = ({ navigation }) => {
+const TransactionDetails = ({ navigation, route }) => {
+  const data = route.params
+  console.log(data);
   let [fontsLoaded] = useFonts({
     InterBlack: require("../assets/Fonts/Inter-Black.ttf"),
     InterLight: require("../assets/Fonts/Inter-Light.ttf"),
@@ -33,14 +35,58 @@ const TransactionDetails = ({ navigation }) => {
         </View>
       </View>
       <View style={styles.contentContainer}>
+        <View style={styles.center}>
+          <Image
+            source={data.image }
+            style={styles.image}
+          />
+          <View style={{ backgroundColor: data.type == "income" ? COLORS.income : COLORS.expense, paddingHorizontal: 15, paddingVertical: 3, borderRadius: 50 }}>
+            <Text style={{ textTransform: "capitalize", fontSize: 16, color: "white" }}>{data.type}</Text>
+          </View>
+        </View>
         {fontsLoaded &&
-          <View style={[styles.walletHeader, { paddingVertical: 20 }]}>
-            <View style={[styles.walletHeader]}>
-              <Text style={{ color: COLORS.secDark, fontSize: 18 }}>Total Balance</Text>
-              <Text style={{ color: COLORS.dark, fontSize: 32, fontWeight: "700", marginTop: 10 }}>$2,548.00</Text>
-            </View>
+          <View style={{ marginTop: 20, flexDirection: "row", justifyContent: "space-between" }}>
+            <Text style={{ fontSize: 18, fontWeight: "700" }}>Transaction details</Text>
+            <MaterialIcons name="keyboard-arrow-down" size={24} color="black" />
           </View>
         }
+        <View>
+          <ScrollView>
+            <View style={styles.flex}>
+              <Text style={{ ...styles.text, color: COLORS.secDark }}>Status</Text>
+              <Text style={{ ...styles.text, textTransform: "capitalize", color: data.type == "income" ? COLORS.income : COLORS.expense }}>{data.type}</Text>
+            </View>
+            <View style={styles.flex}>
+              <Text style={{ ...styles.text, color: COLORS.secDark }}>To</Text>
+              <Text style={{ ...styles.text, color: COLORS.dark }}>{data.name}</Text>
+            </View>
+            <View style={styles.flex}>
+              <Text style={{ ...styles.text, color: COLORS.secDark }}>Time</Text>
+              <Text style={styles.text}>04:30PM</Text>
+            </View>
+            <View style={styles.flex}>
+              <Text style={{ ...styles.text, color: COLORS.secDark }}>Date</Text>
+              <Text style={styles.text}>Feb 29, 2022</Text>
+            </View>
+            <View style={{ backgroundColor: COLORS.secWhite, height: 2 }} />
+            <View style={styles.flex}>
+              <Text style={{ ...styles.text, color: COLORS.secDark }}>Spending</Text>
+              <Text style={styles.text}>{data.amount}</Text>
+            </View>
+            <View style={styles.flex}>
+              <Text style={{ ...styles.text, color: COLORS.secDark }}>Fee</Text>
+              <Text style={styles.text}></Text>
+            </View>
+            <View style={{ backgroundColor: COLORS.secWhite, height: 2 }} />
+            <View style={styles.flex}>
+              <Text style={{ ...styles.text, color: COLORS.secDark }}>Total</Text>
+              <Text style={styles.text}></Text>
+            </View>
+            <TouchableOpacity style={styles.btn}>
+              <Text style={{ color: COLORS.primary, fontSize: 18, fontWeight: "700" }}>Download Receipt</Text>
+            </TouchableOpacity>
+          </ScrollView>
+        </View>
       </View>
     </SafeAreaView>
   )
@@ -76,5 +122,36 @@ const styles = StyleSheet.create({
   },
   walletHeader: {
     alignItems: "center"
+  },
+  center: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  image: {
+    width: 90,
+    height: 80,
+    borderRadius: 25,
+    resizeMode: "contain",
+    marginBottom: 10
+  },
+  flex: {
+    paddingVertical: 10,
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  text: {
+    fontWeight: "700",
+    fontSize: 16
+  },
+  btn: {
+    marginVertical: 20,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 2,
+    padding: 15,
+    borderRadius: 50,
+    borderColor: COLORS.primary
   }
+
 })
