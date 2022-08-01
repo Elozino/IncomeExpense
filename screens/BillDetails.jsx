@@ -66,7 +66,8 @@ const BillDetails = ({ navigation, route }) => {
             </View>
           </View>
         }
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn}
+          onPress={() => navigation.navigate("BillPayment", data)}>
           <Text style={{ color: COLORS.white, fontSize: 18, fontWeight: "700" }}>Confirm and Pay</Text>
         </TouchableOpacity>
       </View>
