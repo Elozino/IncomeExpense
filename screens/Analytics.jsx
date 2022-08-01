@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useFonts } from 'expo-font';
@@ -6,12 +6,27 @@ import { COLORS } from '../constant/color';
 import { StatusBar } from 'expo-status-bar';
 import Ionicons from "react-native-vector-icons/Ionicons"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
+import { LineChart } from "react-native-chart-kit";
+const screenWidth = Dimensions.get("window").width;
+
+// const chartConfig = {
+//   backgroundGradientFrom: "#1E2923",
+//   backgroundGradientFromOpacity: 0,
+//   backgroundGradientTo: "#08130D",
+//   backgroundGradientToOpacity: 0.5,
+//   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+//   strokeWidth: 2, // optional, default 3
+//   barPercentage: 0.5,
+//   useShadowColorFromDataset: false // optional
+// };
+
 
 const Analytics = () => {
   let [fontsLoaded] = useFonts({
     InterBlack: require("../assets/Fonts/Inter-Black.ttf"),
     InterLight: require("../assets/Fonts/Inter-Light.ttf"),
   });
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
@@ -31,14 +46,45 @@ const Analytics = () => {
         </View>
       </View>
       <View style={styles.contentContainer}>
-        {fontsLoaded &&
-          <View style={[styles.walletHeader, { paddingVertical: 20 }]}>
-            <View style={[styles.walletHeader]}>
-              <Text style={{ color: COLORS.secDark, fontSize: 18 }}>Total Balance</Text>
-              <Text style={{ color: COLORS.dark, fontSize: 32, fontWeight: "700", marginTop: 10 }}>$2,548.00</Text>
-            </View>
-          </View>
-        }
+        <View>
+          <Text>Bezier Line Chart</Text>
+          <LineChart
+            data={{
+              labels: ["January", "February", "March", "April", "May", "June"],
+              datasets: [
+                {
+                  data: [
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100
+                  ]
+                }
+              ]
+            }}
+            width={Dimensions.get("window").width - 40} // from react-native
+            height={220}
+            yAxisLabel="$"
+            yAxisSuffix="k"
+            yAxisInterval={1} // optional, defaults to 1
+            chartConfig={{
+              backgroundColor: "#fff",
+              backgroundGradientFrom: "#fff",
+              backgroundGradientTo: "#fff",
+              // decimalPlaces: 2, // optional, defaults to 2dp
+              color: (opacity = 1) => `rgba(66, 150, 144, ${opacity})`,
+              style: {borderRadius: 16},
+              propsForDots: {r: "4"}
+            }}
+            bezier
+            style={{
+              marginVertical: 8,
+              borderRadius: 16,
+            }}
+          />
+        </View>
       </View>
     </SafeAreaView>
   )
