@@ -9,11 +9,12 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 
 const TransactionDetails = ({ navigation, route }) => {
   const data = route.params
-  console.log(data);
+
   let [fontsLoaded] = useFonts({
     InterBlack: require("../assets/Fonts/Inter-Black.ttf"),
     InterLight: require("../assets/Fonts/Inter-Light.ttf"),
   });
+  
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />

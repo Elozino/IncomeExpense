@@ -12,7 +12,6 @@ import TrasanctionStats from '../components/TransactionStats';
 import UpcomingBill from '../components/UpcomingBill';
 
 const Wallet = ({ navigation }) => {
-  const [active, setActive] = useState(false)
   const [transBtn, setTransBtn] = useState(true)
   const [billsBtn, setBillsBtn] = useState(false)
   let [fontsLoaded] = useFonts({

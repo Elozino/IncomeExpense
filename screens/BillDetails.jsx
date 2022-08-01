@@ -9,11 +9,12 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 
 const BillDetails = ({ navigation, route }) => {
   const data = route.params
-  console.log(data);
+
   let [fontsLoaded] = useFonts({
     InterBlack: require("../assets/Fonts/Inter-Black.ttf"),
     InterLight: require("../assets/Fonts/Inter-Light.ttf"),
   });
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
@@ -105,7 +106,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   flex: {
-    // flex: 1,
     paddingVertical: 10,
     flexDirection: "row",
     justifyContent: "space-between"

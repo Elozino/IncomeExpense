@@ -1,19 +1,24 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, Image, Switch } from 'react-native'
+import React, { useState } from 'react'
+import CheckBox from "expo-checkbox";
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useFonts } from 'expo-font';
 import { COLORS } from '../constant/color';
 import { StatusBar } from 'expo-status-bar';
 import Ionicons from "react-native-vector-icons/Ionicons"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
 
 const BillPayment = ({ navigation, route }) => {
+  const [debit, setDebit] = useState(false)
+  const [paypal, setPaypal] = useState(false)
   const data = route.params
-  console.log(data);
+
   let [fontsLoaded] = useFonts({
     InterBlack: require("../assets/Fonts/Inter-Black.ttf"),
     InterLight: require("../assets/Fonts/Inter-Light.ttf"),
   });
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
@@ -37,7 +42,7 @@ const BillPayment = ({ navigation, route }) => {
       <View style={styles.contentContainer}>
         {fontsLoaded &&
           <View style={[{ paddingVertical: 20 }]}>
-            <View style={{ flexDirection: "row"}}>
+            <View style={{ flexDirection: "row" }}>
               <Image
                 source={data.image}
                 resizeMode="contain"
@@ -65,9 +70,59 @@ const BillPayment = ({ navigation, route }) => {
               <Text style={{ ...styles.text, color: COLORS.secDark }}>Total</Text>
               <Text style={styles.text}>$ 13.99..</Text>
             </View>
+            <View>
+              <Text style={{ ...styles.text, marginVertical: 15, fontWeight: "700", fontSize: 18 }}>Select a payment method</Text>
+              <TouchableOpacity
+                style={{
+                  ...styles.flex,
+                  padding: 10,
+                  backgroundColor: debit ? "rgba(66, 150, 144, .3)" : "white",
+                  borderRadius: 10
+                }}>
+                <View style={styles.paymentMethod}>
+                  <View style={styles.iconWrapper}>
+                    <Ionicons name="wallet" size={24} color={COLORS.btnPrimary} />
+                  </View>
+                  <Text style={styles.text}>Debit Card</Text>
+                </View>
+                <CheckBox
+                  disabled={false}
+                  value={debit}
+                  onValueChange={(newValue) => {
+                    setDebit(newValue)
+                    setPaypal(false)
+                  }}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  ...styles.flex,
+                  padding: 10,
+                  backgroundColor: paypal ? "rgba(66, 150, 144, .3)" : "white",
+                  borderRadius: 10,
+                  marginTop: 15
+                }}
+              >
+                <View style={styles.paymentMethod}>
+                  <View style={styles.iconWrapper}>
+                    <FontAwesome5 name="paypal" size={24} color={COLORS.btnPrimary} />
+                  </View>
+                  <Text style={styles.text}>Paypal</Text>
+                </View>
+                <CheckBox
+                  disabled={false}
+                  value={paypal}
+                  onValueChange={(newValue) => {
+                    setPaypal(newValue)
+                    setDebit(false)
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         }
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn}
+          onPress={() => navigation.navigate("ConnectWallet",)}>
           <Text style={{ color: COLORS.white, fontSize: 18, fontWeight: "700" }}>Pay Now</Text>
         </TouchableOpacity>
       </View>
@@ -107,7 +162,8 @@ const styles = StyleSheet.create({
   flex: {
     paddingVertical: 10,
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    alignItems: "center"
   },
   text: {
     fontWeight: "700",
@@ -121,5 +177,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 15,
     borderRadius: 50,
+  },
+  paymentMethod: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  iconWrapper: {
+    marginRight: 10,
+    padding: 10,
+    borderRadius: 50,
+    width: 50,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: COLORS.white,
   }
 })
