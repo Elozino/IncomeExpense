@@ -10,7 +10,7 @@ import { ScrollView, TouchableHighlight } from 'react-native-gesture-handler';
 import TransHistory from '../components/TransHistory';
 import TrasanctionStats from '../components/TransactionStats';
 
-const Wallet = () => {
+const Wallet = ({ navigation }) => {
   const [active, setActive] = useState(false)
   const [transBtn, setTransBtn] = useState(true)
   const [billsBtn, setBillsBtn] = useState(false)
@@ -87,8 +87,8 @@ const Wallet = () => {
         <ScrollView showsVerticalScrollIndicator={false}
           style={{ paddingTop: 10 }}
         >
-          <TrasanctionStats />
-          <TrasanctionStats />
+          <TrasanctionStats navigation={navigation} />
+          <TrasanctionStats navigation={navigation} />
         </ScrollView>
       </View>
     </SafeAreaView>

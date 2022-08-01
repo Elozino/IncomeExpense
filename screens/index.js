@@ -4,3 +4,6 @@ export { default as Wallet } from "./Wallet.jsx";
 export { default as Profile } from "./Profile.jsx";
 export { default as Welcome } from "./Welcome.jsx";
 export { default as TransactionDetails } from "./TransactionDetails.jsx";
+export { default as BillDetails } from "./BillDetails.jsx";
+export { default as BillPayment } from "./BillPayment.jsx";
+export { default as ConnectWallet } from "./ConnectWallet.jsx";

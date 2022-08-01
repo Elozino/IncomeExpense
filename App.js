@@ -4,7 +4,15 @@ import { getFonts } from "./assets/Fonts/fonts.js";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Wallet, Profile, Analytics, Welcome, TransactionDetails } from "./screens";
+import {
+  Home,
+  Wallet,
+  Profile,
+  Analytics,
+  Welcome,
+  TransactionDetails,
+} from "./screens";
+import WalletStack from "./navigators/WalletStack.jsx";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Entypo from "react-native-vector-icons/Entypo";
@@ -55,8 +63,8 @@ const BottomTabScreen = () => {
         }}
       />
       <BottomTab.Screen
-        name="Wallet"
-        component={Wallet}
+        name="WalletStack"
+        component={WalletStack}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <FontAwesome5
@@ -93,11 +101,13 @@ export default function App() {
   return (
     <NavigationContainer>
       <StatusBar style="auto" />
-
       <Stack.Navigator screenOptions={{ header: () => null }}>
         <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="BottomTabScreen" component={BottomTabScreen} />
-        <Stack.Screen name="TransactionDetails" component={TransactionDetails} />
+        <Stack.Screen
+          name="TransactionDetails"
+          component={TransactionDetails}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

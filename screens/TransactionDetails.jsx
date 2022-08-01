@@ -7,7 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 
-const TransactionDetails = () => {
+const TransactionDetails = ({ navigation }) => {
   let [fontsLoaded] = useFonts({
     InterBlack: require("../assets/Fonts/Inter-Black.ttf"),
     InterLight: require("../assets/Fonts/Inter-Light.ttf"),
@@ -17,7 +17,9 @@ const TransactionDetails = () => {
       <StatusBar style="light" />
       <View style={styles.headerWrapper}>
         <View style={styles.header}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+          >
             <MaterialIcons name="arrow-back-ios" size={28} color={COLORS.white} />
           </TouchableOpacity>
           <View style={styles.headerTextWrapper}>
@@ -26,7 +28,7 @@ const TransactionDetails = () => {
             }
           </View>
           <TouchableOpacity>
-          <MaterialCommunityIcons name="dots-horizontal" size={28} color={COLORS.white}/>
+            <MaterialCommunityIcons name="dots-horizontal" size={28} color={COLORS.white} />
           </TouchableOpacity>
         </View>
       </View>
