@@ -45,7 +45,7 @@ const BillDetails = ({ navigation, route }) => {
               />
               <Text style={{ color: COLORS.dark, fontSize: 18, textAlign: "center" }}>
                 You will pay{" "}
-                <Text style={{color: COLORS.primary}}>
+                <Text style={{ lineHeight: 25, fontWeight: "bold", color: COLORS.primary }}>
                   {data.name}
                 </Text>
                 {" "}for one month with BCA OneKlik
