@@ -50,3 +50,7 @@ export const transImage = [
     img: require("../assets/image/image11.png"),
   },
 ];
+
+export const upcomingBill = [
+  {}
+]

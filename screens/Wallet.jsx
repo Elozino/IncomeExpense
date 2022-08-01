@@ -9,6 +9,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import { ScrollView, TouchableHighlight } from 'react-native-gesture-handler';
 import TransHistory from '../components/TransHistory';
 import TrasanctionStats from '../components/TransactionStats';
+import UpcomingBill from '../components/UpcomingBill';
 
 const Wallet = ({ navigation }) => {
   const [active, setActive] = useState(false)
@@ -87,8 +88,16 @@ const Wallet = ({ navigation }) => {
         <ScrollView showsVerticalScrollIndicator={false}
           style={{ paddingTop: 10 }}
         >
-          <TrasanctionStats navigation={navigation} />
-          <TrasanctionStats navigation={navigation} />
+          {transBtn ?
+
+            <>
+              <TrasanctionStats navigation={navigation} />
+              <TrasanctionStats navigation={navigation} />
+            </> :
+            <>
+              <UpcomingBill navigation={navigation}/>
+            </>
+          }
         </ScrollView>
       </View>
     </SafeAreaView>

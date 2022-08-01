@@ -145,7 +145,6 @@ const styles = StyleSheet.create({
   },
   btn: {
     marginVertical: 20,
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 2,
